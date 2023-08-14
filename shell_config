@@ -1,3 +1,4 @@
+# JVM config
 export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
 export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
 export JAVA_17_HOME=$(/usr/libexec/java_home -v17)
@@ -7,5 +8,14 @@ alias java8='sudo rm -f "$JAVA_HOME_SYMLINK"; ln -s "$JAVA_8_HOME" "$JAVA_HOME_S
 alias java11='sudo rm -f "$JAVA_HOME_SYMLINK"; ln -s "$JAVA_11_HOME" "$JAVA_HOME_SYMLINK"'
 alias java17='sudo rm -f "$JAVA_HOME_SYMLINK"; ln -s "$JAVA_17_HOME" "$JAVA_HOME_SYMLINK"'
 
-# export symlink path
+# export symlink path as java home path
 export JAVA_HOME=$JAVA_HOME_SYMLINK
+
+# Override FreeBSD libraries with their GNU equivalents
+export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH"
+
+# Custom aliases
+alias skip_tests='export MAVEN_EXTRA_ARGS="-DskipTests -Dmaven.test.skip"'
